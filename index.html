@@ -1,261 +1,1021 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Axel Mile Escartin — Portfolio</title>
-<meta name="description" content="Portfolio of Axel Mile Escartin — gaming videos, tutorials, edits, and music." />
-<meta property="og:title" content="Axel Mile Escartin — Portfolio">
-<meta property="og:description" content="Gaming • Tutorials • Edits • Music">
-<meta property="og:image" content="your-thumbnail.jpg">
-<meta property="og:type" content="website">
-
-<style>
-  :root {
-    --bg: #0f1724;
-    --card: #0b1220;
-    --muted: #94a3b8;
-    --accent: #db2777;
-    --glass: rgba(255,255,255,0.03);
-    --radius: 16px;
-    --max-width: 1100px;
-    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  }
-  * { box-sizing: border-box; }
-  html, body { height: 100%; scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: var(--sans);
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(219,39,119,0.08), transparent), linear-gradient(180deg, rgba(11,16,32,1) 0%, rgba(8,10,18,1) 100%);
-    color: #e6eef8;
-    padding: 32px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  .container {
-    width: 100%;
-    max-width: var(--max-width);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius: 20px;
-    padding: 28px;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-    backdrop-filter: blur(6px) saturate(120%);
-    margin: 0 auto;
-  }
-  header {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .brand { display: flex; align-items: center; gap: 14px; }
-  .logo {
-    width: 64px; height: 64px; border-radius: 14px;
-    background: url('https://i.pinimg.com/736x/01/08/4b/01084b0c0bfe1e895273fb83212ab47c.jpg') center/cover no-repeat;
-  display: grid;
-  place-items: center;
-    flex: 0 0 64px;
-    box-shadow: 0 6px 18px rgba(219,39,119,0.16);
-  }
-  h1 { font-size: 20px; margin: 0; }
-  p.lead { margin: 0; color: var(--muted); font-size: 13px; }
-  nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-  .nav-link {
-    color: var(--muted);
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-  }
-  .nav-link:hover { background: var(--glass); color: var(--accent); }
-  .theme-toggle {
-    background: var(--glass);
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--muted);
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  .theme-toggle:hover { background: var(--accent); color: white; }
-  main { display: grid; grid-template-columns: 1fr 360px; gap: 20px; }
-  .panel {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding: 20px;
-    border-radius: var(--radius);
-  }
-  .hero { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
-  .avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 18px;
-
-  background: url('https://i.pinimg.com/originals/54/ec/c7/54ecc7817795e96cb5b5654c1bf3042e.gif')
-              center/cover no-repeat;
-
-  display: grid;
-  place-items: center;
-  flex: 0 0 110px;
-  box-shadow: 0 6px 18px rgba(219,39,119,0.16);
-  }
-  .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .tag {
-    background: rgba(255,255,255,0.03);
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 13px;
-    color: var(--muted);
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-  .tag:hover { background: var(--accent); color: white; }
-  .projects { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
-  .project {
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform .14s ease, box-shadow .14s ease;
-    text-decoration: none; color: inherit;
-  }
-  .project:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(2,6,23,0.5); }
-  .project .thumb {
-    height: 120px;
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    background: url('thumbnail.jpg') center/cover no-repeat, linear-gradient(135deg, rgba(219,39,119,0.12), rgba(244,114,182,0.06));
-    margin-bottom: 8px;
-  }
-  .about { line-height: 1.5; color: var(--muted); }
-  .btn {
-    display: inline-block; padding: 10px 14px; border-radius: 12px;
-    background: linear-gradient(90deg, var(--accent), #f472b6);
-    color: white; text-decoration: none; font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  .btn:hover { opacity: 0.85; transform: translateY(-2px); }
-  footer { margin-top: 18px; color: var(--muted); font-size: 13px; text-align: center; }
-
-  @media (max-width: 900px) {
-    main { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 500px) {
-    header { flex-direction: column; align-items: flex-start; }
-  }
-  body.light {
-    --bg: #f5f5f5;
-    --card: #ffffff;
-    --muted: #4b5563;
-    --accent: #8a2be2;
-    color: #1f2937;
-    background: white;
-  } 
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axel Mile Escartin — Portfolio</title>
+  <meta name="description" content="Portfolio of Axel Mile Escartin — gaming videos, tutorials, edits, and music.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Axel Mile Escartin — Portfolio">
+  <meta property="og:description" content="Gaming • Tutorials • Edits • Music">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ============================================
+       CSS VARIABLES & RESET
+       ============================================ */
+    :root {
+      /* Colors - Dark Theme (Default) */
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #0f1724;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-glass: rgba(255, 255, 255, 0.05);
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --accent-primary: #db2777;
+      --accent-secondary: #f472b6;
+      --accent-glow: rgba(219, 39, 119, 0.4);
+      
+      --border-color: rgba(255, 255, 255, 0.08);
+      --shadow-color: rgba(0, 0, 0, 0.4);
+      
+      /* Typography */
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      
+      /* Border Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      
+      /* Transitions */
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.5s ease;
+    }
+    
+    /* Light Theme */
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.8);
+      --bg-glass: rgba(255, 255, 255, 0.6);
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --accent-primary: #7c3aed;
+      --accent-secondary: #a78bfa;
+      --accent-glow: rgba(124, 58, 237, 0.3);
+      
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background var(--transition-normal), color var(--transition-normal);
+    }
+    
+    /* ============================================
+       BACKGROUND EFFECTS
+       ============================================ */
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .bg-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(99, 102, 241, 0.15), transparent 40%);
+      animation: bgFloat 20s ease-in-out infinite;
+    }
+    
+    @keyframes bgFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(2%, 2%) rotate(1deg); }
+      66% { transform: translate(-1%, 1%) rotate(-1deg); }
+    }
+    
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: particleFloat 15s infinite;
+    }
+    
+    @keyframes particleFloat {
+      0%, 100% { 
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.3; }
+      100% { 
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    /* ============================================
+       CONTAINER & LAYOUT
+       ============================================ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+    }
+    
+    /* ============================================
+       HEADER
+       ============================================ */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) 0;
+      margin-bottom: var(--space-2xl);
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      box-shadow: 0 8px 32px var(--accent-glow);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    
+    .logo:hover {
+      transform: scale(1.05) rotate(-5deg);
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+    
+    .brand-info h1 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    .brand-info p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      z-index: -1;
+    }
+    
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .nav-link:hover::before {
+      opacity: 1;
+    }
+    
+    /* Theme Toggle */
+    .theme-toggle {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: all var(--transition-fast);
+      backdrop-filter: blur(10px);
+    }
+    
+    .theme-toggle:hover {
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    
+    /* ============================================
+       MAIN GRID LAYOUT
+       ============================================ */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-xl);
+    }
+    
+    @media (max-width: 968px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* ============================================
+       CARDS
+       ============================================ */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      backdrop-filter: blur(10px);
+      transition: all var(--transition-normal);
+    }
+    
+    .card:hover {
+      border-color: rgba(219, 39, 119, 0.3);
+      box-shadow: 0 20px 60px var(--shadow-color);
+    }
+    
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .avatar-wrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+    
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+    
+    .avatar::before {
+      content: '🎮';
+      z-index: 1;
+    }
+    
+    .avatar-glow {
+      position: absolute;
+      inset: -10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: var(--radius-lg);
+      filter: blur(20px);
+      opacity: 0.5;
+      animation: avatarPulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes avatarPulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    
+    .hero-content h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-content p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 500px;
+    }
+    
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+    
+    .tag {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+      cursor: default;
+    }
+    
+    .tag:hover {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+    
+    /* ============================================
+       PROJECTS SECTION
+       ============================================ */
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 2px;
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+    
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      transform: scaleX(0);
+      transition: transform var(--transition-normal);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(219, 39, 119, 0.3);
+      box-shadow: 0 20px 50px var(--shadow-color);
+    }
+    
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+      transition: transform var(--transition-normal);
+    }
+    
+    .project-card:hover .project-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    
+    .project-card.facebook .project-icon {
+      background: linear-gradient(135deg, #1877f2, #42a5f5);
+    }
+    
+    .project-card.youtube .project-icon {
+      background: linear-gradient(135deg, #ff0000, #ff6b6b);
+    }
+    
+    .project-card.tiktok .project-icon {
+      background: linear-gradient(135deg, #000000, #25f4ee);
+    }
+    
+    .project-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .project-card p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+    
+    .project-arrow {
+      position: absolute;
+      bottom: var(--space-lg);
+      right: var(--space-lg);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all var(--transition-fast);
+      color: var(--accent-primary);
+    }
+    
+    .project-card:hover .project-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* ============================================
+       ARCHIVE SECTION
+       ============================================ */
+    .archive-section {
+      margin-top: var(--space-2xl);
+    }
+    
+    .archive-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .archive-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) var(--space-lg);
+      background: var(--bg-glass);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .archive-header h4 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .archive-badge {
+      background: var(--accent-primary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .archive-iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      background: var(--bg-primary);
+    }
+    
+    /* ============================================
+       SIDEBAR
+       ============================================ */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    
+    .sidebar-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .sidebar-card p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+    
+    /* Contact Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-md);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px var(--accent-glow);
+    }
+    
+    .btn-full {
+      width: 100%;
+      margin-top: var(--space-md);
+    }
+    
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+    
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 1.125rem;
+      transition: all var(--transition-fast);
+    }
+    
+    .social-link:hover {
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+      transform: translateY(-3px);
+    }
+    
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      margin-top: var(--space-2xl);
+      padding: var(--space-xl) 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .footer p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    
+    .footer-brand {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .fade-in-delay-1 { animation-delay: 0.1s; }
+    .fade-in-delay-2 { animation-delay: 0.2s; }
+    .fade-in-delay-3 { animation-delay: 0.3s; }
+    .fade-in-delay-4 { animation-delay: 0.4s; }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 640px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-content h2 {
+        font-size: 1.5rem;
+      }
+      
+      .tags {
+        justify-content: center;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .archive-iframe {
+        height: 350px;
+      }
+    }
+    
+    /* ============================================
+       CUSTOM SCROLLBAR
+       ============================================ */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+  </style>
 </head>
 <body>
+  <!-- Background Effects -->
+  <div class="bg-gradient"></div>
+  <div class="particles" id="particles"></div>
+  
   <div class="container">
-    <header>
+    <!-- Header -->
+    <header class="header fade-in">
       <div class="brand">
-        <div class="logo" role="img" aria-label="Logo"></div>
-        <div>
+        <div class="logo" role="img" aria-label="Logo">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <div class="brand-info">
           <h1>Axel Mile Escartin</h1>
-          <p class="lead">Gaming • Tutorials • Edits • Music</p>
+          <p>Gaming • Tutorials • Edits • Music</p>
         </div>
       </div>
-      <nav>
+      <nav class="nav">
         <a class="nav-link" href="#projects">Projects</a>
         <a class="nav-link" href="#about">About</a>
         <a class="nav-link" href="#contact">Contact</a>
-        <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+          <span>Dark</span>
+        </button>
       </nav>
     </header>
-
-    <main>
-      <section>
-        <div class="panel">
+    
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Left Column -->
+      <main>
+        <!-- Hero Card -->
+        <div class="card fade-in fade-in-delay-1">
           <div class="hero">
-            <div class="avatar" aria-label="Axel Mile Escartin"></div>
-            <div>
+            <div class="avatar-wrapper">
+              <div class="avatar-glow"></div>
+              <div class="avatar" aria-label="Axel Mile Escartin"></div>
+            </div>
+            <div class="hero-content">
               <h2>Hi — I'm Axel</h2>
               <p>I create gaming videos, tutorials, edits, and music. My projects live on Facebook, YouTube, and TikTok.</p>
               <div class="tags">
-                <span class="tag">Gaming</span>
-                <span class="tag">Video Editing</span>
-                <span class="tag">Music</span>
-                <span class="tag">Tutorials</span>
+                <span class="tag"><i class="fas fa-gamepad" style="margin-right: 6px;"></i>Gaming</span>
+                <span class="tag"><i class="fas fa-video" style="margin-right: 6px;"></i>Video Editing</span>
+                <span class="tag"><i class="fas fa-music" style="margin-right: 6px;"></i>Music</span>
+                <span class="tag"><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i>Tutorials</span>
               </div>
             </div>
           </div>
-
-          <div id="projects" class="projects-section">
-            <h3>Featured Projects</h3>
-            <div class="projects">
-              <a class="project" href="https://www.facebook.com/mollyns356" target="_blank" rel="noopener noreferrer" aria-label="Facebook Videos">
-                <div class="thumb"></div>
-                <h3>Facebook Videos</h3>
-                <p class="small muted">Gaming, tutorials, and edits.</p>
-              </a>
-              <a class="project" href="https://www.youtube.com/@FAZZBUNNY" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
-                <div class="thumb"></div>
-                <h3>YouTube Channel</h3>
-                <p class="small muted">Videos and music content.</p>
-              </a>
-              <a class="project" href="https://www.tiktok.com/@fazzbunny8485?_t=8kiBwroojxJ&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok Clips">
-                <div class="thumb"></div>
-                <h3>TikTok Clips</h3>
-                <p class="small muted">Quick gaming highlights.</p>
-              </a>
-            </div>
+        </div>
+        
+        <!-- Projects Section -->
+        <div class="projects-section reveal" id="projects" style="margin-top: var(--space-2xl);">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="projects-grid">
+            <a class="project-card facebook" href="https://www.facebook.com/mollyns356" target="_blank" rel="noopener noreferrer">
+              <div class="project-icon">
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <h3>Facebook Videos</h3>
+              <p>Gaming, tutorials, and edits</p>
+              <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
             
-<h3 style="margin-top:25px;">My Edits Archive</h3>
-
-<div class="archive-wrapper">
-  <iframe 
-    src="https://drive.google.com/embeddedfolderview?id=1zbsRM0YX7YLJOV0yZoLWv7WM055s2Wkx#list"
-    style="width:100%; height:600px; border:0; margin-top:10px; border-radius:12px;  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.4);
-"> 
-  </iframe>
-</div>
+            <a class="project-card youtube" href="https://www.youtube.com/@FAZZBUNNY" target="_blank" rel="noopener noreferrer">
+              <div class="project-icon">
+                <i class="fab fa-youtube"></i>
+              </div>
+              <h3>YouTube Channel</h3>
+              <p>Videos and music content</p>
+              <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
+            
+            <a class="project-card tiktok" href="https://www.tiktok.com/@fazzbunny8485" target="_blank" rel="noopener noreferrer">
+              <div class="project-icon">
+                <i class="fab fa-tiktok"></i>
+              </div>
+              <h3>TikTok Clips</h3>
+              <p>Quick gaming highlights</p>
+              <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
           </div>
         </div>
-      </section>
-
-      <aside>
-        <div class="panel about" id="about">
-          <h3>About Me</h3>
-          <p>I'm passionate about gaming, music, and creating tutorials and edits that entertain and help others learn. I share my work across Facebook, YouTube, and TikTok.</p>
+        
+        <!-- Archive Section -->
+        <div class="archive-section reveal">
+          <h2 class="section-title">My Edits Archive</h2>
+          <div class="archive-container">
+            <div class="archive-header">
+              <h4><i class="fas fa-folder-open" style="color: var(--accent-primary);"></i> Google Drive</h4>
+              <span class="archive-badge">LIVE</span>
+            </div>
+            <iframe 
+              class="archive-iframe"
+              src="https://drive.google.com/embeddedfolderview?id=1zbsRM0YX7YLJOV0yZoLWv7WM055s2Wkx#list"
+              title="Edits Archive"
+              loading="lazy">
+            </iframe>
+          </div>
         </div>
-
-        <div class="panel" id="contact" style="margin-top:14px">
-          <h4>Contact</h4>
-          <p class="muted small">Reach me through my socials or email.</p>
-          <a class="btn" href="mailto:axelmilesescartin@gmail.com">Email Me</a>
-         
+      </main>
+      
+      <!-- Right Column (Sidebar) -->
+      <aside class="sidebar">
+        <!-- About Card -->
+        <div class="card sidebar-card reveal" id="about">
+          <h3><i class="fas fa-user" style="color: var(--accent-primary);"></i> About Me</h3>
+          <p>I'm passionate about gaming, music, and creating tutorials and edits that entertain and help others learn. I share my work across Facebook, YouTube, and TikTok.</p>
+          <div class="social-links">
+            <a class="social-link" href="https://www.facebook.com/mollyns356" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="social-link" href="https://www.youtube.com/@FAZZBUNNY" target="_blank" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a class="social-link" href="https://www.tiktok.com/@fazzbunny8485" target="_blank" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Contact Card -->
+        <div class="card sidebar-card reveal" id="contact">
+          <h3><i class="fas fa-envelope" style="color: var(--accent-primary);"></i> Contact</h3>
+          <p>Reach me through my socials or email. I'm always open to collaborations and new projects!</p>
+          <a class="btn btn-primary btn-full" href="mailto:axelmilesescartin@gmail.com">
+            <i class="fas fa-paper-plane"></i>
+            Email Me
+          </a>
         </div>
       </aside>
-    </main>
-
-    <footer>
-      <p class="small muted">© 2025 FAZZBUNNY ENTERTAINMENT — All rights reserved.</p>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer reveal">
+      <p>© 2025 <span class="footer-brand">FAZZBUNNY ENTERTAINMENT</span> — All rights reserved.</p>
     </footer>
   </div>
-
-<script>
-  const toggleBtn = document.getElementById('themeToggle');
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light');
-    toggleBtn.textContent = document.body.classList.contains('light') ? '☀️ Light' : '🌙 Dark';
-  });
-</script>
+  
+  <script>
+    // ============================================
+    // THEME TOGGLE
+    // ============================================
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const themeText = themeToggle.querySelector('span');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeUI(savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeUI(newTheme);
+    });
+    
+    function updateThemeUI(theme) {
+      if (theme === 'light') {
+        themeIcon.className = 'fas fa-sun';
+        themeText.textContent = 'Light';
+      } else {
+        themeIcon.className = 'fas fa-moon';
+        themeText.textContent = 'Dark';
+      }
+    }
+    
+    // ============================================
+    // PARTICLE EFFECT
+    // ============================================
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 15 + 's';
+      particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+      particlesContainer.appendChild(particle);
+    }
+    
+    // ============================================
+    // SCROLL REVEAL ANIMATION
+    // ============================================
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+    
+    // ============================================
+    // SMOOTH SCROLL FOR NAV LINKS
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // ============================================
+    // NAV LINK ACTIVE STATE
+    // ============================================
+    const sections = document.querySelectorAll('section, .projects-section, .archive-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    const activeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    sections.forEach(section => activeObserver.observe(section));
+  </script>
 </body>
 </html>
