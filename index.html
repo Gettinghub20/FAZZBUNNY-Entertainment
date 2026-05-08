@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Axel Mile Escartin — Game Developer & Video Editor</title>
+<meta name="description" content="Portfolio of Axel Mile Escartin — Independent Game Developer, Video Editor, and Content Creator." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #fff5f8; --bg-alt: #ffe9f0; --card: #ffffff;
+    --text: #1a0a14; --text-muted: #6b4858; --border: #f5d0dc;
+    --accent: #dc143c; --accent-2: #ff1f6d;
+    --accent-glow: rgba(220, 20, 60, 0.18);
+    --shadow: 0 4px 20px rgba(220, 20, 60, 0.08);
+    --shadow-hover: 0 12px 35px rgba(220, 20, 60, 0.18);
+    --orb-1: rgba(255, 31, 109, 0.28); --orb-2: rgba(220, 20, 60, 0.20); --orb-3: rgba(255, 105, 140, 0.22);
+  }
+  body.dark {
+    --bg: #0f0a1a; --bg-alt: #1a1030; --card: #1d1335;
+    --text: #f0e9ff; --text-muted: #a89bc7; --border: rgba(157, 78, 221, 0.2);
+    --accent: #9d4edd; --accent-2: #c77dff;
+    --accent-glow: rgba(157, 78, 221, 0.4);
+    --shadow: 0 4px 20px rgba(123, 44, 191, 0.25);
+    --shadow-hover: 0 12px 40px rgba(157, 78, 221, 0.35);
+    --orb-1: rgba(157, 78, 221, 0.35); --orb-2: rgba(199, 125, 255, 0.28); --orb-3: rgba(123, 44, 191, 0.30);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+    position: relative;
+  }
+
+  .bg-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.7; animation: float 20s ease-in-out infinite; }
+  .orb-1 { width: 400px; height: 400px; background: var(--orb-1); top: -100px; left: -100px; }
+  .orb-2 { width: 350px; height: 350px; background: var(--orb-2); top: 40%; right: -120px; animation-delay: -7s; }
+  .orb-3 { width: 300px; height: 300px; background: var(--orb-3); bottom: -80px; left: 30%; animation-delay: -14s; }
+  @keyframes float {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(60px,-40px) scale(1.1); }
+    66% { transform: translate(-40px,50px) scale(0.95); }
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAVBAR */
+  nav.navbar {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .nav-brand {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .nav-right { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: all .25s ease; }
+  .nav-links a:hover { color: var(--accent); background: var(--bg-alt); }
+  .theme-toggle { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 14px; transition: all 0.25s ease; }
+  .theme-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+
+  /* HERO */
+  .hero { padding: 90px 0 70px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .hero-eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .hero h1 {
+    font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero p.subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; margin-bottom: 24px; }
+  .hero-email { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+  .hero-email a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .hero-email a:hover { text-decoration: underline; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .avatar {
+    width: 180px; height: 180px; border-radius: 50%;
+    background: url('https://yt3.googleusercontent.com/tYpXV7SiOnZBuTV1dpq_AqNxcuVfv7gcs2jlk8CxUk6MK0AWofpPHV6oJMYbgw1ruUiCwzpWedE=s160-c-k-c0x00ffffff-no-rj') center/cover;
+    border: 4px solid var(--card);
+    box-shadow: 0 0 0 4px var(--accent), 0 20px 50px var(--accent-glow);
+    animation: pulseGlow 3s ease-in-out infinite; flex-shrink: 0;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 4px var(--accent), 0 20px 50px var(--accent-glow); }
+    50% { box-shadow: 0 0 0 4px var(--accent-2), 0 25px 60px var(--accent-glow); }
+  }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; border: none; transition: all .25s ease; font-family: 'DM Sans', sans-serif; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; box-shadow: 0 4px 20px var(--accent-glow); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+  .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--bg-alt); border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 80px 0; position: relative; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .section-heading { font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .section-desc { color: var(--text-muted); max-width: 640px; margin-bottom: 40px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; }
+  .about-grid p { color: var(--text-muted); margin-bottom: 14px; }
+  .about-grid strong { color: var(--text); }
+  .skills-category { margin-bottom: 22px; }
+  .skills-category h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; }
+  .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill { background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 500; transition: all 0.25s ease; }
+  .skill:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-2px); }
+
+  /* SHOWREEL */
+  #showreel { padding: 0 0 80px; }
+  .showreel-wrap {
+    position: relative; border-radius: 24px; overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-hover);
+    cursor: pointer; background: #000;
+  }
+  .showreel-stage {
+    position: relative; width: 100%; aspect-ratio: 16/6;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #05000e;
+  }
+  .yt-iframe-wrap {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 1s ease; pointer-events: none;
+    overflow: hidden; z-index: 1;
+  }
+  .yt-iframe-wrap.active { opacity: 1; }
+  .yt-iframe-wrap iframe {
+    position: absolute;
+    width: 160%; height: 160%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border: none; pointer-events: none;
+  }
+  .thumb-placeholder {
+    position: absolute; inset: 0; pointer-events: none;
+    background: #05000e; overflow: hidden; z-index: 2;
+    transition: opacity 0.8s ease;
+  }
+  .thumb-placeholder::before {
+    content: ''; position: absolute; inset: -50%;
+    background: conic-gradient(from 0deg at 60% 50%, transparent 0deg, rgba(157,78,221,0.14) 60deg, transparent 120deg, rgba(199,125,255,0.09) 200deg, transparent 300deg);
+    animation: spinGlow 14s linear infinite;
+  }
+  .thumb-placeholder::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(157,78,221,0.24) 0%, transparent 55%), radial-gradient(ellipse at 78% 35%, rgba(123,44,191,0.16) 0%, transparent 50%), radial-gradient(ellipse at 50% 100%, rgba(199,125,255,0.12) 0%, transparent 60%);
+    animation: glowShift 6s ease-in-out infinite alternate;
+  }
+  @keyframes spinGlow { to { transform: rotate(360deg); } }
+  @keyframes glowShift { 0% { opacity: 0.6; transform: scale(1); } 100% { opacity: 1; transform: scale(1.08); } }
+  .showreel-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.45) 100%); z-index: 3; pointer-events: none; }
+  .showreel-rings { position: absolute; display: flex; align-items: center; justify-content: center; z-index: 4; pointer-events: none; opacity: 0; transition: opacity 0.35s ease; }
+  .showreel-wrap:hover .showreel-rings { opacity: 1; }
+  .s-ring { position: absolute; border-radius: 50%; border: 2px solid var(--accent); animation: sRingPulse 2.4s ease-in-out infinite; }
+  .s-ring-1 { width: 120px; height: 120px; animation-delay: 0s; }
+  .s-ring-2 { width: 180px; height: 180px; opacity: 0.5; animation-delay: 0.4s; }
+  .s-ring-3 { width: 240px; height: 240px; opacity: 0.25; animation-delay: 0.8s; }
+  .s-ring-4 { width: 310px; height: 310px; opacity: 0.12; animation-delay: 1.2s; }
+  @keyframes sRingPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+  .showreel-play-btn {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 5;
+    box-shadow: 0 0 40px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.4);
+    transform: scale(0.85); transition: transform 0.3s ease; pointer-events: none;
+  }
+  .showreel-wrap:hover .showreel-play-btn { transform: scale(1); }
+  .showreel-now-playing {
+    position: absolute; top: 14px; left: 14px; z-index: 6;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 12px; border-radius: 999px;
+    color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    pointer-events: none; opacity: 0; transition: opacity 0.4s ease;
+  }
+  .showreel-now-playing.visible { opacity: 1; }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2);
+    animation: livePulse 1.4s ease-in-out infinite;
+  }
+  @keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .showreel-desc-block { margin-top: 32px; max-width: 800px; }
+  .showreel-desc-block .section-title { margin-bottom: 8px; }
+  .showreel-desc-block .section-heading { margin-bottom: 16px; font-size: 28px; }
+  .showreel-desc-block p { color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+  .showreel-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+
+  /* COMING SOON OVERLAY */
+  .coming-soon-overlay {
+    position: absolute; inset: 0; z-index: 10;
+    background: rgba(0,0,0,0.96);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+  }
+  .coming-soon-overlay.visible { opacity: 1; pointer-events: all; }
+  .cs-icon { font-size: 52px; animation: csBounce 2s ease-in-out infinite; }
+  @keyframes csBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .cs-title {
+    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    letter-spacing: -0.02em;
+  }
+  .cs-sub { color: rgba(255,255,255,0.5); font-size: 14px; text-align: center; max-width: 300px; }
+  .cs-dismiss {
+    margin-top: 8px; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6);
+    padding: 8px 20px; border-radius: 999px; font-size: 13px; cursor: pointer;
+    transition: all 0.2s ease; font-family: 'DM Sans', sans-serif;
+  }
+  .cs-dismiss:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  /* INDIE GAME */
+  #indie { background: var(--bg-alt); }
+  .indie-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .indie-visual { aspect-ratio: 4/3; background: linear-gradient(135deg, var(--bg), var(--card)); border: 1px solid var(--border); border-radius: 18px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .indie-visual-icon { font-size: 80px; opacity: 0.15; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .indie-coming-badge { display: inline-block; margin-bottom: 14px; background: var(--bg); border: 1px solid var(--border); color: var(--accent); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .indie-engines { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .engine-tag { background: var(--card); border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--text-muted); transition: all 0.2s ease; }
+  .engine-tag:hover { border-color: var(--accent); color: var(--accent); }
+  /* Platform tags — coming soon style */
+  .platform-group { margin-top: 24px; }
+  .platform-group h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; }
+  .platform-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--card); border: 1px dashed var(--border);
+    padding: 5px 12px; border-radius: 8px;
+    font-size: 12px; font-weight: 600; color: var(--text-muted);
+    opacity: 0.6;
+  }
+  .platform-tag::after { content: 'Soon'; font-size: 9px; font-weight: 700; color: var(--accent); background: var(--bg-alt); padding: 1px 5px; border-radius: 999px; letter-spacing: 0.06em; }
+
+  /* ARCHIVE */
+  #archive { padding: 80px 0; }
+  .archive-trigger-row { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .archive-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; border: none; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; font-family: 'DM Sans', sans-serif; box-shadow: 0 4px 20px var(--accent-glow); }
+  .archive-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+  .archive-showcase-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 12px; }
+  .showcase-links { display: flex; flex-direction: column; gap: 10px; }
+  .showcase-link { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; text-decoration: none; color: inherit; transition: all 0.25s ease; cursor: pointer; }
+  .showcase-link:hover { border-color: var(--accent); background: var(--bg-alt); transform: translateX(4px); box-shadow: var(--shadow); }
+  .showcase-link-num { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; font-size: 11px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
+  .showcase-link-icon { font-size: 16px; flex-shrink: 0; }
+  .showcase-link-name { font-size: 14px; font-weight: 500; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .showcase-link-arrow { color: var(--accent); font-size: 14px; font-weight: 700; flex-shrink: 0; opacity: 0; transition: opacity 0.2s ease; }
+  .showcase-link:hover .showcase-link-arrow { opacity: 1; }
+
+  /* SIDEBAR */
+  .archive-sidebar { position: fixed; top: 0; left: -420px; width: 400px; height: 100vh; background: var(--card); border-right: 1px solid var(--border); z-index: 500; transition: left 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; box-shadow: 4px 0 40px rgba(0,0,0,0.2); overflow: hidden; }
+  .archive-sidebar.open { left: 0; }
+  .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 499; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .sidebar-overlay.visible { opacity: 1; pointer-events: all; }
+  .sidebar-header { padding: 20px 20px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .sidebar-header h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .sidebar-close { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 16px; display: grid; place-items: center; transition: all 0.2s ease; }
+  .sidebar-close:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .sidebar-list { flex: 1; overflow: hidden; padding: 0; }
+  .sidebar-drive-frame { width: 100%; height: 100%; border: none; }
+  .sidebar-footer { padding: 12px 20px; border-top: 1px solid var(--border); flex-shrink: 0; }
+  .open-drive-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s ease; }
+  .open-drive-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* LIGHTBOX */
+  .lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .lightbox.active { opacity: 1; pointer-events: all; }
+  .lightbox-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .lightbox-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: white; max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lightbox-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 18px; display: grid; place-items: center; transition: all 0.2s ease; }
+  .lightbox-close:hover { background: var(--accent); border-color: var(--accent); }
+  .lightbox-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 20px 20px; overflow: hidden; }
+  .lightbox-frame { width: 100%; max-width: 960px; height: 100%; max-height: calc(100vh - 100px); border: none; border-radius: 12px; background: #000; }
+
+  /* CONTACT — centered */
+  #contact { text-align: center; }
+  #contact .section-desc { margin: 0 auto 40px; }
+  .contact-split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 800px; margin: 0 auto; text-align: left; }
+  .contact-col-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 16px; }
+  .compact-links { display: flex; flex-direction: column; gap: 8px; }
+  .compact-link { display: flex; align-items: center; gap: 14px; padding: 10px 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); text-decoration: none; color: inherit; transition: all 0.25s ease; }
+  .compact-link:hover { border-color: var(--accent); transform: translateX(4px); background: var(--bg-alt); }
+  .compact-icon { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font-size: 16px; color: white; flex-shrink: 0; }
+  .compact-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .compact-sub { font-size: 12px; color: var(--text-muted); }
+
+  /* FOOTER — scroll reveal */
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 0; text-align: center;
+    color: var(--text-muted); font-size: 14px;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  footer.visible { opacity: 1; transform: translateY(0); }
+  footer strong { color: var(--accent); font-weight: 600; }
+
+  /* KRNXM RADIO */
+  .krnxm-radio {
+    position: fixed; top: 88px; right: 20px; width: 280px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25), 0 0 20px var(--accent-glow);
+    z-index: 200; padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+    transform: translateX(calc(100% + 30px));
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    backdrop-filter: blur(10px);
+  }
+  .krnxm-radio.visible { transform: translateX(0); }
+  .radio-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .radio-live { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); font-family: 'Syne', sans-serif; }
+  .radio-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 6px var(--accent-2); animation: livePulse 1.4s ease-in-out infinite; }
+  .radio-stop { background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 22px; height: 22px; border-radius: 3px; cursor: pointer; font-size: 11px; display: grid; place-items: center; transition: all 0.2s ease; }
+  .radio-stop:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .radio-body { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .radio-art { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius: 3px; display: grid; place-items: center; color: white; flex-shrink: 0; box-shadow: 0 0 12px var(--accent-glow); }
+  .radio-info { flex: 1; min-width: 0; }
+  .radio-track { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+  .radio-artist { font-size: 11px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.05em; }
+  .radio-progress { width: 100%; height: 3px; background: var(--bg-alt); border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+  .radio-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width 0.4s linear; }
+  .radio-controls { display: flex; align-items: center; gap: 8px; }
+  .radio-btn { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text); width: 28px; height: 28px; border-radius: 3px; cursor: pointer; display: grid; place-items: center; transition: all 0.2s ease; }
+  .radio-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .radio-time { margin-left: auto; font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .radio-prompt {
+    position: fixed; top: 88px; right: 20px; width: 280px;
+    background: var(--card); border: 1px solid var(--accent); border-radius: 4px;
+    box-shadow: 0 8px 30px var(--accent-glow); z-index: 201; padding: 14px;
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    transform: translateX(calc(100% + 30px));
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .radio-prompt.visible { transform: translateX(0); }
+  .radio-prompt:hover { background: var(--bg-alt); }
+  .radio-prompt-icon { font-size: 22px; animation: csBounce 2s ease-in-out infinite; }
+  .radio-prompt-text { display: flex; flex-direction: column; gap: 2px; }
+  .radio-prompt-text strong { font-family: 'Syne', sans-serif; font-size: 13px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .radio-prompt-text span { font-size: 11px; color: var(--text-muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { padding: 60px 0 40px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero h1 { font-size: 36px; }
+    .avatar { width: 120px; height: 120px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .indie-inner { grid-template-columns: 1fr; gap: 32px; }
+    .contact-split { grid-template-columns: 1fr; gap: 32px; }
+    .section-heading { font-size: 26px; }
+    section { padding: 56px 0; }
+    .archive-sidebar { width: 320px; }
+  }
+  @media (max-width: 600px) {
+    .krnxm-radio, .radio-prompt { width: calc(100vw - 30px); top: auto; bottom: 15px; right: 15px; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease forwards; }
+  .fade-in:nth-child(2) { animation-delay: 0.1s; }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body class="dark">
+
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="archive-sidebar" id="archiveSidebar">
+  <div class="sidebar-header">
+    <h3>🎬 Edits Archive</h3>
+    <button class="sidebar-close" id="sidebarClose">✕</button>
+  </div>
+  <div class="sidebar-list">
+    <iframe class="sidebar-drive-frame"
+      src="https://drive.google.com/embeddedfolderview?id=1zbsRM0YX7YLJOV0yZoLWv7WM055s2Wkx#list"
+      title="Edits Archive"></iframe>
+  </div>
+  <div class="sidebar-footer">
+    <a href="https://drive.google.com/drive/folders/1zbsRM0YX7YLJOV0yZoLWv7WM055s2Wkx?usp=drive_link"
+       target="_blank" rel="noopener" class="open-drive-btn">Open full Google Drive ↗</a>
+  </div>
+</aside>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-header">
+    <div class="lightbox-title" id="lightboxTitle">—</div>
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+  </div>
+  <div class="lightbox-body" id="lightboxBody"></div>
+</div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">Axel M. Escartin</div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#indie">Games</a>
+        <a href="#archive">Archive</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle">☀️ Light</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="fade-in">
+      <div class="hero-eyebrow">Digital Media Professional</div>
+      <h1>Axel Mile Escartin</h1>
+      <p class="subtitle">Independent Game Developer, Professional Video Editor, and Content Creator — crafting interactive experiences and visual stories across multiple platforms.</p>
+      <p class="hero-email">📧 <a href="mailto:axelmilesescartin@gmail.com">axelmilesescartin@gmail.com</a></p>
+      <div class="hero-actions">
+        <a href="#showreel" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="avatar fade-in" role="img" aria-label="Axel Mile Escartin"></div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <div class="section-title">About</div>
+    <h2 class="section-heading">A bit about me</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm a versatile digital media professional with a strong technical background in <strong>Video Editing</strong> and <strong>Game Development</strong>. I specialize in managing end-to-end creative workflows — from concept and production to final delivery.</p>
+        <p>Through <strong>FAZZBUNNY Entertainment</strong>, I've self-managed a complete content production pipeline, using analytics to continuously improve quality and reach. I currently develop independent game projects in <strong>Unity, Godot, and Unreal Engine</strong>, focusing on gameplay mechanics and environmental design.</p>
+        <p>I bring technical expertise, adaptability, and a creative eye to every project I take on.</p>
+      </div>
+      <div>
+        <div class="skills-category"><h4>Game Engines</h4><div class="skills-list"><span class="skill">Unity</span><span class="skill">Godot</span><span class="skill">Unreal Engine</span><span class="skill">Roblox Studio</span></div></div>
+        <div class="skills-category"><h4>Video & Motion</h4><div class="skills-list"><span class="skill">Premiere Pro</span><span class="skill">DaVinci Resolve</span><span class="skill">After Effects</span></div></div>
+        <div class="skills-category"><h4>3D & Design</h4><div class="skills-list"><span class="skill">Blender</span><span class="skill">Photoshop</span><span class="skill">3D Animation</span><span class="skill">VFX</span><span class="skill">Motion Graphics</span></div></div>
+        <div class="skills-category"><h4>Creative</h4><div class="skills-list"><span class="skill">Visual Storytelling</span><span class="skill">Game Design</span><span class="skill">Content Strategy</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="showreel">
+  <div class="container">
+    <div class="showreel-wrap" id="showreelWrap">
+      <div class="showreel-stage" id="showreelStage">
+        <div class="thumb-placeholder" id="thumbPlaceholder"></div>
+        <div class="showreel-gradient"></div>
+        <div class="showreel-now-playing" id="nowPlaying">
+          <span class="live-dot"></span>
+          <span id="nowPlayingLabel">Live Reel</span>
+        </div>
+        <div class="showreel-rings">
+          <div class="s-ring s-ring-1"></div>
+          <div class="s-ring s-ring-2"></div>
+          <div class="s-ring s-ring-3"></div>
+          <div class="s-ring s-ring-4"></div>
+          <div class="showreel-play-btn">
+            <svg viewBox="0 0 24 24" fill="white" width="32" height="32"><polygon points="6,3 20,12 6,21"/></svg>
+          </div>
+        </div>
+        <div class="coming-soon-overlay" id="comingSoonOverlay">
+          <div class="cs-icon">🎬</div>
+          <div class="cs-title">Coming Soon</div>
+          <div class="cs-sub">My full portfolio showreel is currently in production. Check back soon!</div>
+          <button class="cs-dismiss" id="csDismiss">← Back to preview</button>
+        </div>
+      </div>
+    </div>
+    <div class="showreel-desc-block">
+      <div class="section-title">Video Editing</div>
+      <h2 class="section-heading">Cinematic Edits & Content Creation</h2>
+      <p>Through FAZZBUNNY Entertainment, I craft AMVs, gameplay edits, cinematic trailers, and story-driven visual content. Every edit is built for emotional impact — from concept and pacing to color, sound design, and final cut.</p>
+      <div class="showreel-tags">
+        <span class="engine-tag">AMV</span>
+        <span class="engine-tag">Gameplay Edits</span>
+        <span class="engine-tag">Cinematic</span>
+        <span class="engine-tag">Motion Graphics</span>
+        <span class="engine-tag">YouTube Shorts</span>
+        <span class="engine-tag">VFX</span>
+      </div>
+      <a href="https://www.youtube.com/@FAZZBUNNY" target="_blank" rel="noopener" class="btn btn-secondary">Watch on YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<section id="indie" style="background:var(--bg-alt);">
+  <div class="container">
+    <div class="indie-inner">
+      <div>
+        <div class="section-title">Game Development</div>
+        <h2 class="section-heading">Independent Game Projects</h2>
+        <p style="color:var(--text-muted);margin-bottom:20px;line-height:1.7;">I build interactive game projects independently — focusing on gameplay mechanics, environmental design, and immersive player experiences. Each project is a full end-to-end production from concept to build.</p>
+        <div class="indie-coming-badge">🎮 Projects Coming Soon</div>
+        <div class="indie-engines">
+          <span class="engine-tag">Unity</span>
+          <span class="engine-tag">Godot</span>
+          <span class="engine-tag">Unreal Engine</span>
+          <span class="engine-tag">Roblox Studio</span>
+        </div>
+        <div class="platform-group">
+          <h4>Platforms</h4>
+          <div class="indie-engines">
+            <span class="platform-tag">🖥️ PC / Steam</span>
+            <span class="platform-tag">🎮 Epic Games</span>
+            <span class="platform-tag">🎮 PlayStation</span>
+            <span class="platform-tag">🎮 Xbox</span>
+            <span class="platform-tag">🕹️ Nintendo Switch</span>
+            <span class="platform-tag">📱 Mobile</span>
+          </div>
+        </div>
+        <a href="https://gamefazzdev.itch.io/" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top:24px;display:inline-flex;">View on itch.io →</a>
+      </div>
+      <div class="indie-visual">
+        <div class="indie-visual-icon">🎮</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="container">
+    <div class="section-title">Archive</div>
+    <h2 class="section-heading">My Edits Archive</h2>
+    <p class="section-desc">Browse my full collection of AMVs, game trailers, cinematic edits, and video projects. Click any file to watch it in a lightbox.</p>
+    <div class="archive-trigger-row">
+      <button class="archive-btn" id="openArchiveBtn">📁 Browse Full Archive</button>
+      <span style="color:var(--text-muted);font-size:14px;">Google Drive · Click any file to preview</span>
+    </div>
+    <div class="archive-showcase-label">🎬 Featured from archive — refreshes every visit</div>
+    <div class="showcase-links" id="showcaseLinks"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-title">Contact</div>
+    <h2 class="section-heading">Let's connect</h2>
+    <p class="section-desc">Open to collaborations, freelance work, and creative opportunities.</p>
+    <div class="contact-split">
+      <div>
+        <div class="contact-col-label">📬 Get in touch</div>
+        <div class="compact-links">
+          <a class="compact-link" href="mailto:axelmilesescartin@gmail.com">
+            <span class="compact-icon" style="background:linear-gradient(135deg,var(--accent),var(--accent-2));">📧</span>
+            <div><div class="compact-name">Email</div><div class="compact-sub">axelmilesescartin@gmail.com</div></div>
+          </a>
+          <a class="compact-link" href="https://linkedin.com/in/axel-mile-escartin-6207893a7" target="_blank" rel="noopener">
+            <span class="compact-icon" style="background:#0A66C2;font-weight:700;font-size:13px;">in</span>
+            <div><div class="compact-name">LinkedIn</div><div class="compact-sub">Connect with me</div></div>
+          </a>
+          <a class="compact-link" href="#" target="_blank">
+            <span class="compact-icon" style="background:#07C160;">💬</span>
+            <div><div class="compact-name">WeChat</div><div class="compact-sub">Link coming soon</div></div>
+          </a>
+          <a class="compact-link" href="https://t.me/yourusername" target="_blank" rel="noopener">
+            <span class="compact-icon" style="background:#229ED9;">✈️</span>
+            <div><div class="compact-name">Telegram</div><div class="compact-sub">@yourusername</div></div>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="contact-col-label">📱 Follow my work</div>
+        <div class="compact-links">
+          <a class="compact-link" href="https://www.youtube.com/@FAZZBUNNY" target="_blank" rel="noopener">
+            <span class="compact-icon" style="background:#FF0000;">▶</span>
+            <div><div class="compact-name">YouTube</div><div class="compact-sub">@FAZZBUNNY</div></div>
+          </a>
+          <a class="compact-link" href="https://www.facebook.com/mollyns356" target="_blank" rel="noopener">
+            <span class="compact-icon" style="background:#1877F2;font-weight:700;font-size:14px;">f</span>
+            <div><div class="compact-name">Facebook</div><div class="compact-sub">FAZZBUNNY</div></div>
+          </a>
+          <a class="compact-link" href="https://www.tiktok.com/@fazzbunny8485" target="_blank" rel="noopener">
+            <span class="compact-icon" style="background:linear-gradient(135deg,#25F4EE,#FE2C55);">♪</span>
+            <div><div class="compact-name">TikTok</div><div class="compact-sub">@fazzbunny8485</div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="siteFooter">
+  <div class="container">© <strong>FAZZBUNNY Entertainment</strong>. All Rights Reserved.</div>
+</footer>
+
+<!-- KRNXM RADIO -->
+<div class="krnxm-radio" id="krnxmRadio">
+  <div class="radio-header">
+    <div class="radio-live"><span class="radio-dot"></span><span>KRNXM RADIO</span></div>
+    <button class="radio-stop" id="radioStop" title="Stop music">✕</button>
+  </div>
+  <div class="radio-body">
+    <div class="radio-art">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+    </div>
+    <div class="radio-info">
+      <div class="radio-track" id="radioTrack">Loading…</div>
+      <div class="radio-artist">KRNXM</div>
+    </div>
+  </div>
+  <div class="radio-progress"><div class="radio-progress-fill" id="radioProgress"></div></div>
+  <div class="radio-controls">
+    <button class="radio-btn" id="radioPlayPause" title="Play/Pause">
+      <svg id="radioPlayIcon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="6,3 20,12 6,21"/></svg>
+      <svg id="radioPauseIcon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button class="radio-btn" id="radioSkip" title="Next track">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5,4 15,12 5,20"/><rect x="16" y="4" width="3" height="16"/></svg>
+    </button>
+    <div class="radio-time" id="radioTime">0:00</div>
+  </div>
+  <iframe id="scWidget" allow="autoplay"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sherry-chan-922281192/silent-serenity&auto_play=false&visual=false"
+    style="display:none;"></iframe>
+</div>
+
+<div class="radio-prompt" id="radioPrompt">
+  <div class="radio-prompt-icon">🎵</div>
+  <div class="radio-prompt-text">
+    <strong>KRNXM Radio</strong>
+    <span>Tap to start the vibe</span>
+  </div>
+</div>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+
+<script>
+  // ── THEME ──────────────────────────────────────────────
+  const toggleBtn = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') { document.body.classList.remove('dark'); toggleBtn.textContent = '🌙 Dark'; }
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+
+  // ── SHOWREEL ──────────────────────────────────────────
+  const HOOK_DURATION_MS = 5000;
+  const FADE_MS = 1000;
+  const HOOK_START_MIN = 8;
+  const HOOK_START_MAX = 90;
+
+  const KRONEX_EDITS = [
+    'VDDWKumK8vw', 'N9q77ugHVtc', '04qs3HMamzI', 'HywhyDLNqE8',
+    'Tx9pxmbdQ7o', 'y7z1ndgGob4', '-_Rz6NVmDsA', 'yi02Gl-KaME',
+    '7yy5PJ-hwEI', 'rhrbt3Hc3j4'
+  ];
+  const GAMING = [
+    'PGvTNAGQKh4', '3Wl8w5tRs-0', 'uTOS1lL04XE', 'oXbRMFah0oc',
+    'lopw9D-2IdY', 'L87LXx6PBf0', 'KWMWrj4kQ9k', 'Jk_4xyHA88U',
+    'skX8swTZdcw', 'FrWOy-idf0A'
+  ];
+  const ALL_VIDEOS = [...new Set([...KRONEX_EDITS, ...GAMING])];
+
+  const stage = document.getElementById('showreelStage');
+  const placeholder = document.getElementById('thumbPlaceholder');
+  const nowPlaying = document.getElementById('nowPlaying');
+
+  let cycleTimer = null;
+  let frames = [];
+  let activeIdx = 0;
+  let shuffled = [];
+  let queueIdx = 0;
+  let isPaused = false;
+
+  function shuffleArr(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function nextVideoId() {
+    if (queueIdx >= shuffled.length) { shuffled = shuffleArr(ALL_VIDEOS); queueIdx = 0; }
+    return shuffled[queueIdx++];
+  }
+  function randomStart() {
+    return Math.floor(Math.random() * (HOOK_START_MAX - HOOK_START_MIN + 1)) + HOOK_START_MIN;
+  }
+  function buildHookUrl(videoId) {
+    const start = randomStart();
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&start=${start}&loop=1&playlist=${videoId}&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&fs=0`;
+  }
+  function loadIntoFrame(frameIdx, videoId) {
+    frames[frameIdx].frame.src = buildHookUrl(videoId);
+    frames[frameIdx].videoId = videoId;
+  }
+  function buildShowreel() {
+    if (ALL_VIDEOS.length === 0) return;
+    shuffled = shuffleArr(ALL_VIDEOS);
+    queueIdx = 0;
+    for (let i = 0; i < 2; i++) {
+      const wrap = document.createElement('div');
+      wrap.className = 'yt-iframe-wrap';
+      const frame = document.createElement('iframe');
+      frame.allow = 'autoplay; encrypted-media';
+      frame.allowFullscreen = false;
+      wrap.appendChild(frame);
+      stage.insertBefore(wrap, stage.querySelector('.showreel-gradient'));
+      frames.push({ wrap, frame, videoId: null });
+    }
+    loadIntoFrame(0, nextVideoId());
+    setTimeout(() => {
+      placeholder.style.opacity = '0';
+      frames[0].wrap.classList.add('active');
+      nowPlaying.classList.add('visible');
+      setTimeout(() => { placeholder.style.display = 'none'; }, FADE_MS);
+      loadIntoFrame(1, nextVideoId());
+    }, 1400);
+    startCycle();
+  }
+  function tickHook() {
+    if (isPaused) return;
+    const prev = activeIdx;
+    activeIdx = (activeIdx + 1) % 2;
+    frames[activeIdx].wrap.classList.add('active');
+    frames[prev].wrap.classList.remove('active');
+    setTimeout(() => { loadIntoFrame(prev, nextVideoId()); }, FADE_MS);
+  }
+  function startCycle() {
+    if (cycleTimer || ALL_VIDEOS.length < 2) return;
+    cycleTimer = setInterval(tickHook, HOOK_DURATION_MS);
+  }
+  function stopCycle() {
+    if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+  }
+  buildShowreel();
+
+  // ── COMING SOON OVERLAY ────────────────────────────────
+  const overlay = document.getElementById('comingSoonOverlay');
+  const dismiss = document.getElementById('csDismiss');
+  document.getElementById('showreelWrap').addEventListener('click', (e) => {
+    if (e.target === dismiss || dismiss.contains(e.target)) return;
+    if (overlay.classList.contains('visible')) return;
+    overlay.classList.add('visible');
+    isPaused = true; stopCycle();
+  });
+  dismiss.addEventListener('click', () => {
+    overlay.classList.remove('visible');
+    isPaused = false; startCycle();
+  });
+
+  // ── DRIVE FILES ───────────────────────────────────────
+  const DRIVE_FILES = [
+    { id: '1WVOiMkG-pEjzpDt99suwKipW8ErpIBHG', name: '2B — YAD' },
+    { id: '10IrwP4xax30UzqCuDGeeLboTcYC5Lq-6', name: 'Anna Yamada — Save Your Tears' },
+    { id: '16jjS8k7ENQ4A_6ABFv0CyDC0_J8aqwcq', name: 'Bochidarook' },
+    { id: '18KsSZgjfzDC_erQLdwIkVi8m1SMlVXKj', name: 'Kurisu Makise — Heaven Sent' },
+    { id: '16_-XVnr2z1xonL-IS4E92h2e_r6nqZKB', name: 'Makima — You Know Me' },
+    { id: '1zcO2UUmWAJJDN27tyhEF35lHNOWptruY', name: 'Minami Uruka — Shadow Lady' },
+    { id: '1V7Hl1HgNyKerOLgtx2aeajIUTnUwFB3y', name: 'Sasha AOT — Drown' },
+    { id: '1sWHHK03FREsXrv3NlENxbaG9I1T_bXFQ', name: 'Shinoa Hiragi' },
+    { id: '1hu2oFsU0CgwrrzOE6CMlJrwBYC7Zc4i8', name: "Shizuka — Baby I'll Shut Up" },
+    { id: '1l9j3Tca9ZSoymtfXem6owK6dcIejD0Sj', name: 'Tek It' },
+  ];
+  function renderShowcase() {
+    const picks = [...DRIVE_FILES].sort(() => Math.random() - 0.5).slice(0, 3);
+    document.getElementById('showcaseLinks').innerHTML = picks.map((f, i) => `
+      <div class="showcase-link" onclick="openLightbox('${f.id}','${f.name}')">
+        <span class="showcase-link-num">${i+1}</span>
+        <span class="showcase-link-icon">🎬</span>
+        <span class="showcase-link-name">${f.name}</span>
+        <span class="showcase-link-arrow">▶</span>
+      </div>`).join('');
+  }
+  renderShowcase();
+
+  // ── FOOTER SCROLL REVEAL ──────────────────────────────
+  const siteFooter = document.getElementById('siteFooter');
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        siteFooter.classList.add('visible');
+      } else {
+        siteFooter.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  footerObserver.observe(siteFooter);
+
+  // ── SIDEBAR ────────────────────────────────────────────
+  const sidebar = document.getElementById('archiveSidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  document.getElementById('openArchiveBtn').addEventListener('click', () => {
+    sidebar.classList.add('open'); sidebarOverlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  });
+  function closeSidebar() {
+    sidebar.classList.remove('open'); sidebarOverlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
+  sidebarOverlay.addEventListener('click', closeSidebar);
+
+  // ── LIGHTBOX ───────────────────────────────────────────
+  const lightbox = document.getElementById('lightbox');
+  function openLightbox(fileId, name) {
+    document.getElementById('lightboxTitle').textContent = name;
+    const body = document.getElementById('lightboxBody');
+    body.innerHTML = '';
+    const frame = document.createElement('iframe');
+    frame.src = `https://drive.google.com/file/d/${fileId}/preview`;
+    frame.className = 'lightbox-frame';
+    frame.allow = 'autoplay'; frame.allowFullscreen = true;
+    body.appendChild(frame);
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.getElementById('lightboxBody').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeLightbox(); closeSidebar();
+      overlay.classList.remove('visible');
+      isPaused = false; startCycle();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { stopCycle(); }
+    else if (!overlay.classList.contains('visible')) { startCycle(); }
+  });
+
+  // ── KRNXM RADIO ────────────────────────────────────────
+  const KRNXM_TRACKS = [
+    { name: 'Silent Serenity', url: 'https://soundcloud.com/sherry-chan-922281192/silent-serenity' },
+    { name: 'Leap',            url: 'https://soundcloud.com/sherry-chan-922281192/leap-mp3' },
+    { name: 'Last',            url: 'https://soundcloud.com/sherry-chan-922281192/last' },
+    { name: 'Bowen',           url: 'https://soundcloud.com/sherry-chan-922281192/bowen-mp3' },
+    { name: 'Lexend',          url: 'https://soundcloud.com/sherry-chan-922281192/lexend-mp3' },
+    { name: 'Ethereal',        url: 'https://soundcloud.com/sherry-chan-922281192/ethereal' },
+  ];
+  const RADIO_VOLUME = 50;
+  let scWidget = null;
+  let radioQueue = [];
+  let radioQueueIdx = 0;
+  let radioStopped = false;
+  let radioIsPlaying = false;
+
+  const radioEl = document.getElementById('krnxmRadio');
+  const radioPromptEl = document.getElementById('radioPrompt');
+  const radioTrackEl = document.getElementById('radioTrack');
+  const radioTimeEl = document.getElementById('radioTime');
+  const radioProgress = document.getElementById('radioProgress');
+  const playIcon = document.getElementById('radioPlayIcon');
+  const pauseIcon = document.getElementById('radioPauseIcon');
+
+  function shuffleRadio(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function loadTrack(idx) {
+    const track = radioQueue[idx];
+    radioTrackEl.textContent = track.name;
+    scWidget.load(track.url, { auto_play: true, callback: () => { scWidget.setVolume(RADIO_VOLUME); } });
+  }
+  function nextTrack() {
+    radioQueueIdx = (radioQueueIdx + 1) % radioQueue.length;
+    if (radioQueueIdx === 0) radioQueue = shuffleRadio(KRNXM_TRACKS);
+    loadTrack(radioQueueIdx);
+  }
+  function fmtTime(ms) {
+    const s = Math.floor(ms / 1000);
+    return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2,'0')}`;
+  }
+  function startRadio() {
+    if (radioStopped) return;
+    radioPromptEl.classList.remove('visible');
+    radioEl.classList.add('visible');
+    radioQueue = shuffleRadio(KRNXM_TRACKS);
+    radioQueueIdx = 0;
+    scWidget = SC.Widget(document.getElementById('scWidget'));
+    scWidget.bind(SC.Widget.Events.READY, () => { scWidget.setVolume(RADIO_VOLUME); loadTrack(0); });
+    scWidget.bind(SC.Widget.Events.PLAY, () => { radioIsPlaying = true; playIcon.style.display = 'none'; pauseIcon.style.display = 'block'; });
+    scWidget.bind(SC.Widget.Events.PAUSE, () => { radioIsPlaying = false; playIcon.style.display = 'block'; pauseIcon.style.display = 'none'; });
+    scWidget.bind(SC.Widget.Events.FINISH, nextTrack);
+    scWidget.bind(SC.Widget.Events.PLAY_PROGRESS, (e) => {
+      radioProgress.style.width = (e.relativePosition * 100) + '%';
+      scWidget.getPosition((pos) => { radioTimeEl.textContent = fmtTime(pos); });
+    });
+  }
+  setTimeout(() => { if (!radioStopped) radioPromptEl.classList.add('visible'); }, 1500);
+  radioPromptEl.addEventListener('click', startRadio);
+  document.getElementById('radioStop').addEventListener('click', () => {
+    if (scWidget) scWidget.pause();
+    radioEl.classList.remove('visible');
+    radioPromptEl.classList.remove('visible');
+    radioStopped = true;
+  });
+  document.getElementById('radioPlayPause').addEventListener('click', () => {
+    if (!scWidget) return;
+    if (radioIsPlaying) scWidget.pause(); else scWidget.play();
+  });
+  document.getElementById('radioSkip').addEventListener('click', nextTrack);
+</script>
+</body>
+</html>
